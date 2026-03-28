@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>賈許 🐱</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&family=Noto+Sans+JP&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Noto+Sans+JP&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
 :root{
 --cream:#fdf6ee;
---warm:#f2e4cf;
 --brown:#7a4f2e;
 --dark:#2b1a0f;
 --accent:#c8622a;
@@ -24,30 +23,6 @@ font-family:'DM Sans','Noto Sans JP';
 display:flex;
 flex-direction:column;
 align-items:center;
-}
-
-/* 語言 */
-.lang-bar{
-position:fixed;
-top:14px;
-right:14px;
-display:flex;
-gap:6px;
-z-index:100;
-}
-
-.lang-btn{
-padding:6px 12px;
-border-radius:99px;
-border:none;
-background:#00000050;
-color:#fff;
-cursor:pointer;
-}
-
-.lang-btn.active{
-background:#fff;
-color:var(--accent);
 }
 
 /* HERO */
@@ -66,14 +41,17 @@ border-radius:50%;
 overflow:hidden;
 margin:auto;
 border:4px solid rgba(255,255,255,0.4);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:50px;
+}
+
+.avatar-ring img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:50%;
 }
 
 .hero h1{
-font-size:2.2rem;
+font-size:2rem;
 }
 
 /* 卡片 */
@@ -91,191 +69,46 @@ border-radius:16px;
 margin-bottom:12px;
 }
 
-.warning{
-background:#fff3e0;
-padding:15px;
-border-radius:14px;
-color:#e65100;
-font-weight:bold;
-}
-
 /* 按鈕 */
 .btn{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:8px;
+display:block;
 padding:16px;
 border-radius:14px;
-text-decoration:none;
+text-align:center;
 margin-top:10px;
-font-weight:500;
+text-decoration:none;
 }
 
 .btn-primary{background:var(--accent);color:#fff;}
 .btn-dark{background:var(--dark);color:#fff;}
-.btn-outline{border:2px solid #ddd;color:#333;}
 
-/* GPS */
-.gps-card{
-background:linear-gradient(135deg,#2b1a0f,#7a4f2e);
-color:#fff;
-padding:20px;
-border-radius:16px;
-margin-top:12px;
-}
 </style>
 </head>
 
 <body>
 
-<!-- 語言 -->
-<div class="lang-bar">
-<button class="lang-btn active" onclick="setLang('zh',this)">中</button>
-<button class="lang-btn" onclick="setLang('en',this)">EN</button>
-<button class="lang-btn" onclick="setLang('ja',this)">日</button>
-</div>
-
 <!-- HERO -->
 <div class="hero">
-<div class="avatar-ring">🐱</div>
+<div class="avatar-ring">
+<img src="https://raw.githubusercontent.com/godivanlife-creator/liu_josh_0428/main/IMG_0477.jpg" alt="賈許">
+</div>
 <h1>賈許</h1>
 </div>
 
 <div class="card-wrap">
 
-<div class="card warning" id="t-warning"></div>
-
 <div class="card">
-<strong id="t-feature-title"></strong>
-<p id="t-feature"></p>
+🐾 溫和 · 愛撒嬌
 </div>
 
-<div class="card">
-<strong id="t-personality-title"></strong>
-<p id="t-personality"></p>
-</div>
+<a class="btn btn-primary" href="tel:0909030831">📞 聯絡主人 1</a>
+<a class="btn btn-dark" href="tel:0922772161">📞 聯絡主人 2</a>
 
-<a class="btn btn-primary" href="tel:0909030831" id="t-call1"></a>
-<a class="btn btn-dark" href="tel:0922772161" id="t-call2"></a>
-
-<div class="gps-card">
-<p id="t-gps-desc"></p>
-<button class="btn btn-outline" id="gps-btn" onclick="sendGPS()"></button>
-</div>
-
-<a class="btn btn-outline" href="https://www.instagram.com/liu_josh_0428" target="_blank" id="t-ig"></a>
+<a class="btn" href="https://www.instagram.com/liu_josh_0428" target="_blank">
+📸 IG
+</a>
 
 </div>
-
-<script>
-
-const i18n={
-zh:{
-warning:"⚠️ 請勿驚嚇或強抱牠，謝謝🙏",
-featureTitle:"🐾 外型",
-feature:"短腿貓（曼赤肯）",
-personalityTitle:"🐾 個性",
-personality:"溫和 · 愛撒嬌",
-call1:"📞 聯絡主人 1",
-call2:"📞 聯絡主人 2",
-gpsDesc:"按下按鈕傳送目前位置給飼主",
-gpsBtn:"📍 一鍵回報位置",
-gpsLoading:"取得位置中...",
-gpsError:"無法取得位置",
-ig:"📸 IG 看日常"
-},
-en:{
-warning:"⚠️ Please do not scare or grab suddenly",
-featureTitle:"🐾 Features",
-feature:"Munchkin cat",
-personalityTitle:"🐾 Personality",
-personality:"Gentle · Affectionate",
-call1:"📞 Call Owner 1",
-call2:"📞 Call Owner 2",
-gpsDesc:"Send your location to the owner",
-gpsBtn:"📍 Send Location",
-gpsLoading:"Getting location...",
-gpsError:"Location failed",
-ig:"📸 Instagram"
-},
-ja:{
-warning:"⚠️ 急に触らないでください",
-featureTitle:"🐾 特徴",
-feature:"マンチカン",
-personalityTitle:"🐾 性格",
-personality:"優しい · 甘えん坊",
-call1:"📞 飼い主1",
-call2:"📞 飼い主2",
-gpsDesc:"位置情報を送信",
-gpsBtn:"📍 位置送信",
-gpsLoading:"取得中...",
-gpsError:"取得失敗",
-ig:"📸 インスタ"
-}
-};
-
-let currentLang='zh';
-
-function applyLang(){
-const t=i18n[currentLang];
-document.getElementById("t-warning").innerText=t.warning;
-document.getElementById("t-feature-title").innerText=t.featureTitle;
-document.getElementById("t-feature").innerText=t.feature;
-document.getElementById("t-personality-title").innerText=t.personalityTitle;
-document.getElementById("t-personality").innerText=t.personality;
-document.getElementById("t-call1").innerText=t.call1;
-document.getElementById("t-call2").innerText=t.call2;
-document.getElementById("t-gps-desc").innerText=t.gpsDesc;
-document.getElementById("gps-btn").innerText=t.gpsBtn;
-document.getElementById("t-ig").innerText=t.ig;
-}
-
-function setLang(lang,el){
-currentLang=lang;
-applyLang();
-document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
-el.classList.add('active');
-}
-
-applyLang();
-
-/* GPS */
-function sendGPS(){
-const btn=document.getElementById("gps-btn");
-const t=i18n[currentLang];
-
-btn.innerText=t.gpsLoading;
-btn.disabled=true;
-
-if(!navigator.geolocation){
-alert(t.gpsError);
-resetGPS();
-return;
-}
-
-navigator.geolocation.getCurrentPosition(pos=>{
-const lat=pos.coords.latitude.toFixed(6);
-const lng=pos.coords.longitude.toFixed(6);
-const url=`https://maps.google.com/?q=${lat},${lng}`;
-const msg=encodeURIComponent("🐾 發現賈許："+url);
-
-window.location.href=`sms:0909030831?body=${msg}`;
-resetGPS();
-
-},()=>{
-alert(t.gpsError);
-resetGPS();
-});
-}
-
-function resetGPS(){
-const btn=document.getElementById("gps-btn");
-btn.disabled=false;
-btn.innerText=i18n[currentLang].gpsBtn;
-}
-
-</script>
 
 </body>
 </html>
